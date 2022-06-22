@@ -3,20 +3,26 @@ import { createSlice } from '@reduxjs/toolkit';
 export const pokemonSlice = createSlice({
     name: 'pokemon',
     initialState: {
-        loading: false,
-        pokemon: [],
+        isLoading: false,
+        pokemons: [],
     },
+
     reducers: {
-        startLoadingPokemons: (state, action) => {
-            state.loading = true;
+        //  Cuando los pokemons empiezan a cargar
+        startLoadingPokemons: (state, /* action */) => {
+            // modificamos el state y cambiamos el loading a true
+            state.isLoading = true;
         },
-        setPokemon: (state, action) => {
-            state.pokemon = action.payload.pokemons;
-            state.loading = false;
-        },
+        // Cuando ya tenemos los pokemons
+        setPokemons: (state, action) => {
+            //Modificamos el state con los pokemons y la pagina actual, tambien cambiamos el loading a false
+            // Para que los pokemons no se pierdan, hacemos una copia del state y le vamos agregando los pokemons
+            state.pokemons = [...state.pokemons, action.payload.pokemons];
+            //Colocamos el loading a false dando a entender que la carga ya termino
+            state.isLoading = false;
+        }
     }
 });
 
-
 // Action creators are generated for each case reducer function
-export const { setPokemon, startLoadingPokemons } = pokemonSlice.actions;
+export const { setPokemons, startLoadingPokemons } = pokemonSlice.actions;

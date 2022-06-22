@@ -1,2 +1,2 @@
 export * from './pokemonSlice';
-export * from './Thunks';
+export * from './thunks';

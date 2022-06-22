@@ -1,7 +1,8 @@
-import { pokemonApi } from "../../../api/pokemonApi";
-import { setPokemons, startLoadingPokemons } from "./pokemonSlice";
+import { setPokemons, startLoadingPokemons } from "./pokemonSlice/";
 
-export const getPokemons = (page = 0) => {
+export const getPokemons = () => {
+
+    // Hacemos uso de una funcion thunk para que sea asincrona
     return async (dispatch, getState) => {
         // Cuando empieza a cargar los pokemons
         // ejectuamos la accion startLoadingPokemons
@@ -9,11 +10,23 @@ export const getPokemons = (page = 0) => {
 
         //TODO: realizar peticion HTTP para obtener los pokemons
         //Peticion con fetch
-        const resp = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${page * 10}`)
+        const resp = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`)
+        //Convertimos la respuesta a JSON
         const data = await resp.json();
 
-        // Cuando ya tenemos los pokemons
-        // ejectuamos dispatch con la accion setPokemons con los pokemons obtenidos y la pagina actual
-        dispatch(setPokemons({ pokemons: data.results, page: page + 1 }));
+        //Cuando ya tenemos la data, hacemos un map para obtener la data completa de cada pokemon
+        data.results.map(async (d) => {
+            const resData = await fetch(d.url)
+            const fullData = await resData.json();
+
+            // Cuando ya tenemos los pokemons
+            // ejectuamos dispatch con la accion setPokemons con los pokemons obtenidos
+            dispatch(setPokemons({ pokemons: fullData }));
+
+        })
+
+
+
+
     }
 }
