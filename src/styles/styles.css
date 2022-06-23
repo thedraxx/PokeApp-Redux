@@ -1,0 +1,10 @@
+.dark {
+    background-color: rgb(34, 36, 43);
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.light {
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+}
