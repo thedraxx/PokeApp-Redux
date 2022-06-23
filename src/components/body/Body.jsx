@@ -38,7 +38,7 @@ export const Body = () => {
                 <Card.Text>
                   <p className="mx-auto text-center ">Habilities </p>
                   {pokemon.abilities.map((ab) => (
-                    <ListGroup>
+                    <ListGroup key={ab.ability.name}>
                       <ListGroup.Item
                         variant={`${isDarkMode}`}
                         className="mt-1 text-center"

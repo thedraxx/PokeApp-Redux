@@ -9,7 +9,7 @@ function PokemonApp() {
   const dispatch = useDispatch();
 
   const { isDarkMode } = useSelector((state) => state.darkMode);
-  console.log(isDarkMode);
+
   // Hacemos uso de useEffect para que se ejecute cuando cargue el documento y haga dispatch a la accion getPokemons
   useEffect(() => {
     dispatch(getPokemons());
