@@ -1,9 +1,11 @@
 import React from "react";
-import { Button, Card, ListGroup, Spinner } from "react-bootstrap";
+import { Card, ListGroup, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 export const Body = () => {
   //Obtenemos los Pokemons del Store usando UseSelector
   const { isLoading, pokemons } = useSelector((state) => state.pokemons);
+
+  // Usamos UseSelector para saber si esta en modo oscuro o claro
   const { isDarkMode } = useSelector((state) => state.darkMode);
 
   return (
